@@ -23,28 +23,30 @@ else {
 
 //console.log(getComputerChoice());
 
-
 const computerSelection = getComputerChoice();
+
 const introPrompt = prompt("Choose rock, paper, or scissors");
 
-if (introPrompt !== null) {
-            const playerSelection = introPrompt.charAt(0).toUpperCase() + introPrompt.substr(1).toLowerCase();
+let playerSelection;
+
+        if (introPrompt !== null) {
+            playerSelection = introPrompt.charAt(0).toUpperCase() + introPrompt.substr(1).toLowerCase();
             playRound(playerSelection, computerSelection);
         } else {
             alert("Bye bye!");
+            throw new Error("Script terminated");
         }
-
+        
 function playRound(playerSelection, computerSelection) {
- 
-
-// Possible Wins
-if (playerSelection === "Rock" && computerSelection === "Paper") {
+    
+    // Possible Wins
+if (playerSelection === "Rock" && computerSelection === "Scissors") {
     alert("You win, rock beats scissors!");
 }
 else if (playerSelection === "Paper" && computerSelection === "Rock") {
     alert("You win, paper beats rock!");
 }
-else if (playerSelection === "Scissors" && computerSelection === "Paper") {
+else if (playerSelection === "Scissors" && computerSelection ==="Paper"){
     alert("You win, scissors beats paper!");
 }
 // Possible Losses
@@ -58,15 +60,16 @@ else if (playerSelection === "Scissors" && computerSelection === "Rock") {
     alert("You lose, rock beats scissors!");
 }
 // Tie
+
 else if (playerSelection === computerSelection){
     alert("It's a tie, try again!");
 }
+
 else {
     alert("Invalid");
 }
 }
 
-playRound(playerSelection, computerSelection);
 
 /* Test platerSelection and computerSelection values
 console.log(playerSelection);
