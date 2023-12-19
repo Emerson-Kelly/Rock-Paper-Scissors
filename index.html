@@ -63,10 +63,12 @@ else if (playerSelection === "Scissors" && computerSelection === "Rock") {
 
 else if (playerSelection === computerSelection){
     alert("It's a tie, try again!");
+// IF THIS STATEMENT IS TRUE, CIRCLE BACK TO BEGINNING PROMPT
 }
 
 else {
     alert("Invalid");
+    throw new Error("Script terminated");
 }
 }
 
