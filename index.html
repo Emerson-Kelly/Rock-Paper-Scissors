@@ -9,44 +9,83 @@
 
 <body>
     <style>
-        .rps-container{
-           
-        
-            gap: 2rem;
-           
+        * {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
-        .rps-button{
-           width: 100px;
-            height: 36px;
+        h1 {
+            color: #3d3d3d;
+            font-weight: 500;
+        }
+
+        p {
+            color: #1a1a1a;
+            height: 40px;
+        }
+
+        h1,p {
+            
+            margin: 18px;
+        }
+
+        body{
+            background-color: white;
+        }
+
+        .rps-container {
+        
+        }
+
+        @media only screen and (max-width: 600px) {
+  .rps-container {
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+        
+
+
+        .rps-button {
+            padding: 1rem 4rem;
             border: 2px solid #3484F0;
             border-radius: 2rem;
+            font-size: 300%;
+            margin: 0 1rem;
+            
         }
 
-        .selection{
+
+      
+        .selection {
             display: flex;
             flex-direction: column;
             align-items: center;
-    justify-content: center;
+            justify-content: center;
             height: 100vh;
-    
+        }
+
+        .rps-image {
+            max-width: 400px;
         }
     </style>
-
   
-        
-        <div class="selection">
-            <p id="computer-selection">Computer Selection</p>
-            <div class="rps-container">
-        <button class="rps-button" id="rock">Rock</button>
-        <button class="rps-button" id="paper">Paper</button>
-        <button class="rps-button" id="scissors">Scissors</button>
+  <div class="selection">
+    <img class="rps-image" src="https://steemitimages.com/DQmXMEunC26qDgTTYCo4c7paS5ehoNjSXikca7o9vZRbY9T/suit6.png" alt="rps">
+    <h1 id="gameresult"></h1>
+    <p id="comselection"></p>
+    <div class="rps-container">
+        <button type="button" class="rps-button" id="rock">✊</button>
+        <button type="button" class="rps-button" id="paper">✋</button>
+        <button type="button" class="rps-button" id="scissors">✌️</button>
     </div>
-    </div>
+</div>
 
-    <script>
-/*
-        function getComputerChoice() {
+<script>
+    function getComputerChoice() {
             let choices = Math.floor(Math.random() * 3);
             if (choices === 0) {
                 return "Rock";
@@ -57,73 +96,101 @@
             }
         }
 
+        let comSelection = document.getElementById('comselection');
+        let gameResult = document.getElementById('gameresult');
+
         function playRound(playerSelection, computerSelection) {
             // Possible Wins
             if (playerSelection === "Rock" && computerSelection === "Scissors") {
-                alert("You win, rock beats scissors!");
+                comSelection.textContent = "You win, rock beats scissors!";
                 return 1; // Player wins
             } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-                alert("You win, paper beats rock!");
+                comSelection.textContent = "You win, paper beats rock!";
                 return 1; // Player wins
             } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
-                alert("You win, scissors beats paper!");
+                comSelection.textContent = "You win, scissors beats paper!";
                 return 1; // Player wins
             }
             // Possible Losses
             else if (playerSelection === "Rock" && computerSelection === "Paper") {
-                alert("You lose, paper beats rock!");
+                comSelection.textContent = "You lose, paper beats rock!";
                 return -1; // Computer wins
             } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
-                alert("You lose, scissors beats paper!");
+                comSelection.textContent = "You lose, scissors beats paper!";
                 return -1; // Computer wins
             } else if (playerSelection === "Scissors" && computerSelection === "Rock") {
-                alert("You lose, rock beats scissors!");
+                comSelection.textContent = "You lose, rock beats scissors!";
                 return -1; // Computer wins
             }
             else if (playerSelection === computerSelection) {
-                alert("It's a tie, try again!")
+                comSelection.textContent = "It's a tie, try again!"
                 return 0;
             }
             else {
-                alert("Invalid answer");
+                comSelection.textContent = "Invalid answer";
                 return 0; // Invalid answer, doesn't count as a round played
             }
         }
 
+        
+       // RPS UI BUTTONS
+        const rock = document.querySelector("#rock");
+        rock.addEventListener("click", () => {
+            let playerSelection = "Rock";
+            let computerSelection = getComputerChoice();
+            playRound(playerSelection, computerSelection);
+        });
+
+        let paper = document.querySelector("#paper");
+        paper.addEventListener("click", () => {
+            let playerSelection = "Paper";
+            let computerSelection = getComputerChoice();
+            playRound(playerSelection, computerSelection);
+        });
+
+        let scissors = document.querySelector("#scissors");
+        scissors.addEventListener("click", () => {
+            let playerSelection = "Scissors";
+            let computerSelection = getComputerChoice();
+            playRound(playerSelection, computerSelection);
+        })
+        
         function game() {
-            let playerScore = 0;
-            let computerScore = 0;
+    let playerScore = 0;
+    let computerScore = 0;
 
-            while (playerScore < 3 && computerScore < 3) {
-                const computerSelection = getComputerChoice();
-                const introPrompt = prompt("Choose rock, paper, or scissors");
-
-                if (introPrompt === null) {
-                    alert("Bye bye!");
-                    throw new Error("Script terminated");
-                }
-
-                const playerSelection = introPrompt.charAt(0).toUpperCase() + introPrompt.substr(1).toLowerCase();
-                const result = playRound(playerSelection, computerSelection);
-
-                if (result === 1) {
-                    playerScore++;
-                } else if (result === -1) {
-                    computerScore++;
-                }
-            }
-
-            if (playerScore === 3) {
-                alert("You win the game!");
-            } else {
-                alert("You lose the game!");
-            }
+    while (playerScore < 3 && computerScore < 3) {
+      /*
+        const computerSelection = getComputerChoice();
+        
+        // const introPrompt = prompt("Choose rock, paper, or scissors");
+        
+        if (introPrompt === null) {
+            alert("Bye bye!");
+            throw new Error("Script terminated");
         }
-
-        // Start the game
-        game();
+        
+        // const playerSelection = introPrompt.charAt(0).toUpperCase() + introPrompt.substr(1).toLowerCase();
+ 
 */
-    </script>
+const result = playRound(playerSelection, computerSelection);
+        if (result === 1) {
+            playerScore++;
+        } else if (result === -1) {
+            computerScore++;
+        }
+    }
+
+    if (playerScore === 3) {
+        gameResult.textContent = "You win the game!";
+    } else {
+        gameResult.textContent = "You lose the game!";
+    }
+}
+        
+                // Start the game
+                game();
+</script>
 </body>
 
 </html>
