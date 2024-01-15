@@ -8,8 +8,44 @@
 </head>
 
 <body>
-    <script>
+    <style>
+        .rps-container{
+           
+        
+            gap: 2rem;
+           
+        }
 
+        .rps-button{
+           width: 100px;
+            height: 36px;
+            border: 2px solid #3484F0;
+            border-radius: 2rem;
+        }
+
+        .selection{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+    justify-content: center;
+            height: 100vh;
+    
+        }
+    </style>
+
+  
+        
+        <div class="selection">
+            <p id="computer-selection">Computer Selection</p>
+            <div class="rps-container">
+        <button class="rps-button" id="rock">Rock</button>
+        <button class="rps-button" id="paper">Paper</button>
+        <button class="rps-button" id="scissors">Scissors</button>
+    </div>
+    </div>
+
+    <script>
+/*
         function getComputerChoice() {
             let choices = Math.floor(Math.random() * 3);
             if (choices === 0) {
@@ -86,7 +122,7 @@
 
         // Start the game
         game();
-
+*/
     </script>
 </body>
 
