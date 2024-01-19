@@ -23,30 +23,29 @@
             height: 40px;
         }
 
-        h1,p {
-            
+        h1,
+        p {
+
             margin: 18px;
         }
 
-        body{
+        body {
             background-color: white;
         }
 
-        .rps-container {
-        
-        }
+        .rps-container {}
 
         @media only screen and (max-width: 600px) {
-  .rps-container {
-    gap: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  }
-}
+            .rps-container {
+                gap: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+            }
+        }
 
-        
+
 
 
         .rps-button {
@@ -55,11 +54,11 @@
             border-radius: 2rem;
             font-size: 300%;
             margin: 0 1rem;
-            
+
         }
 
 
-      
+
         .selection {
             display: flex;
             flex-direction: column;
@@ -72,20 +71,21 @@
             max-width: 400px;
         }
     </style>
-  
-  <div class="selection">
-    <img class="rps-image" src="https://steemitimages.com/DQmXMEunC26qDgTTYCo4c7paS5ehoNjSXikca7o9vZRbY9T/suit6.png" alt="rps">
-    <h1 id="gameresult"></h1>
-    <p id="comselection"></p>
-    <div class="rps-container">
-        <button type="button" class="rps-button" id="rock">✊</button>
-        <button type="button" class="rps-button" id="paper">✋</button>
-        <button type="button" class="rps-button" id="scissors">✌️</button>
-    </div>
-</div>
 
-<script>
-    function getComputerChoice() {
+    <div class="selection">
+        <img class="rps-image" src="https://steemitimages.com/DQmXMEunC26qDgTTYCo4c7paS5ehoNjSXikca7o9vZRbY9T/suit6.png"
+            alt="rps">
+        <h1 id="gameresult"></h1>
+        <p id="comselection"></p>
+        <div class="rps-container">
+            <button type="button" class="rps-button" id="rock">✊</button>
+            <button type="button" class="rps-button" id="paper">✋</button>
+            <button type="button" class="rps-button" id="scissors">✌️</button>
+        </div>
+    </div>
+
+    <script>
+        function getComputerChoice() {
             let choices = Math.floor(Math.random() * 3);
             if (choices === 0) {
                 return "Rock";
@@ -98,6 +98,8 @@
 
         let comSelection = document.getElementById('comselection');
         let gameResult = document.getElementById('gameresult');
+        let playerScore = 0;
+        let computerScore = 0;
 
         function playRound(playerSelection, computerSelection) {
             // Possible Wins
@@ -126,14 +128,11 @@
                 comSelection.textContent = "It's a tie, try again!"
                 return 0;
             }
-            else {
-                comSelection.textContent = "Invalid answer";
-                return 0; // Invalid answer, doesn't count as a round played
-            }
         }
 
-        
-       // RPS UI BUTTONS
+
+        // RPS UI BUTTONS
+
         const rock = document.querySelector("#rock");
         rock.addEventListener("click", () => {
             let playerSelection = "Rock";
@@ -141,56 +140,23 @@
             playRound(playerSelection, computerSelection);
         });
 
-        let paper = document.querySelector("#paper");
+        const paper = document.querySelector("#paper");
         paper.addEventListener("click", () => {
             let playerSelection = "Paper";
             let computerSelection = getComputerChoice();
             playRound(playerSelection, computerSelection);
         });
 
-        let scissors = document.querySelector("#scissors");
+        const scissors = document.querySelector("#scissors");
         scissors.addEventListener("click", () => {
             let playerSelection = "Scissors";
             let computerSelection = getComputerChoice();
             playRound(playerSelection, computerSelection);
-        })
-        
-        function game() {
-    let playerScore = 0;
-    let computerScore = 0;
+        });
 
-    while (playerScore < 3 && computerScore < 3) {
-      /*
-        const computerSelection = getComputerChoice();
-        
-        // const introPrompt = prompt("Choose rock, paper, or scissors");
-        
-        if (introPrompt === null) {
-            alert("Bye bye!");
-            throw new Error("Script terminated");
-        }
-        
-        // const playerSelection = introPrompt.charAt(0).toUpperCase() + introPrompt.substr(1).toLowerCase();
- 
-*/
-const result = playRound(playerSelection, computerSelection);
-        if (result === 1) {
-            playerScore++;
-        } else if (result === -1) {
-            computerScore++;
-        }
-    }
 
-    if (playerScore === 3) {
-        gameResult.textContent = "You win the game!";
-    } else {
-        gameResult.textContent = "You lose the game!";
-    }
-}
         
-                // Start the game
-                game();
-</script>
+    </script>
 </body>
 
 </html>
