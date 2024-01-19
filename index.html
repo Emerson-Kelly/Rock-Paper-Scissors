@@ -72,21 +72,23 @@
         }
     </style>
 
-    <div class="selection">
-        <img class="rps-image" src="https://steemitimages.com/DQmXMEunC26qDgTTYCo4c7paS5ehoNjSXikca7o9vZRbY9T/suit6.png"
-            alt="rps">
-        <h1 id="gameresult"></h1>
-        <p id="comselection"></p>
-        <div class="rps-container">
-            <button type="button" class="rps-button" id="rock">✊</button>
-            <button type="button" class="rps-button" id="paper">✋</button>
-            <button type="button" class="rps-button" id="scissors">✌️</button>
-        </div>
+<div class="selection">
+    <img class="rps-image" src="https://steemitimages.com/DQmXMEunC26qDgTTYCo4c7paS5ehoNjSXikca7o9vZRbY9T/suit6.png"
+        alt="rps">
+    <h1 id="gameresult"></h1>
+    <p id="comselection"></p>
+    <div class="rps-container">
+        <button type="button" class="rps-button" id="rock">✊</button>
+        <button type="button" class="rps-button" id="paper">✋</button>
+        <button type="button" class="rps-button" id="scissors">✌️</button>
     </div>
+    <button type="button" id="goAgain" style="margin-top: 20px; display: none;">Go Again</button>
+</div>
 
     <script>
+      
        
-       let comSelection = document.getElementById('comselection');
+      let comSelection = document.getElementById('comselection');
         let gameResult = document.getElementById('gameresult');
         let playerScore = 0;
         let computerScore = 0;
@@ -157,6 +159,9 @@
             document.getElementById("rock").disabled = true;
             document.getElementById("paper").disabled = true;
             document.getElementById("scissors").disabled = true;
+
+            // Show "Go Again" button
+            document.getElementById("goAgain").style.display = "block";
         }
 
         // RPS UI BUTTONS
@@ -179,6 +184,24 @@
             let playerSelection = "Scissors";
             let computerSelection = getComputerChoice();
             playRound(playerSelection, computerSelection);
+        });
+
+        // "Go Again" button click event
+        const goAgainButton = document.getElementById("goAgain");
+        goAgainButton.addEventListener("click", () => {
+            // Reset game state
+            playerScore = 0;
+            computerScore = 0;
+            comSelection.textContent = "";
+            gameResult.textContent = "";
+
+            // Enable buttons
+            document.getElementById("rock").disabled = false;
+            document.getElementById("paper").disabled = false;
+            document.getElementById("scissors").disabled = false;
+
+            // Hide "Go Again" button
+            goAgainButton.style.display = "none";
         });
     </script>
 </body>
