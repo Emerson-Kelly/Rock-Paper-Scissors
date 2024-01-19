@@ -85,6 +85,12 @@
     </div>
 
     <script>
+       
+       let comSelection = document.getElementById('comselection');
+        let gameResult = document.getElementById('gameresult');
+        let playerScore = 0;
+        let computerScore = 0;
+
         function getComputerChoice() {
             let choices = Math.floor(Math.random() * 3);
             if (choices === 0) {
@@ -96,43 +102,64 @@
             }
         }
 
-        let comSelection = document.getElementById('comselection');
-        let gameResult = document.getElementById('gameresult');
-        let playerScore = 0;
-        let computerScore = 0;
-
         function playRound(playerSelection, computerSelection) {
+            let result = 0; // Default: It's a tie
             // Possible Wins
             if (playerSelection === "Rock" && computerSelection === "Scissors") {
                 comSelection.textContent = "You win, rock beats scissors!";
-                return 1; // Player wins
+                result = 1; // Player wins
             } else if (playerSelection === "Paper" && computerSelection === "Rock") {
                 comSelection.textContent = "You win, paper beats rock!";
-                return 1; // Player wins
+                result = 1; // Player wins
             } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
                 comSelection.textContent = "You win, scissors beats paper!";
-                return 1; // Player wins
+                result = 1; // Player wins
             }
             // Possible Losses
             else if (playerSelection === "Rock" && computerSelection === "Paper") {
                 comSelection.textContent = "You lose, paper beats rock!";
-                return -1; // Computer wins
+                result = -1; // Computer wins
             } else if (playerSelection === "Paper" && computerSelection === "Scissors") {
                 comSelection.textContent = "You lose, scissors beats paper!";
-                return -1; // Computer wins
+                result = -1; // Computer wins
             } else if (playerSelection === "Scissors" && computerSelection === "Rock") {
                 comSelection.textContent = "You lose, rock beats scissors!";
-                return -1; // Computer wins
-            }
-            else if (playerSelection === computerSelection) {
+                result = -1; // Computer wins
+            } else if (playerSelection === computerSelection) {
                 comSelection.textContent = "It's a tie, try again!"
-                return 0;
+            }
+
+            updateScore(result);
+        }
+
+        function updateScore(result) {
+            if (result === 1) {
+                playerScore++;
+            } else if (result === -1) {
+                computerScore++;
+            }
+
+            if (playerScore === 5 || computerScore === 5) {
+                endGame();
             }
         }
 
+        function endGame() {
+            if (playerScore > computerScore) {
+                gameResult.textContent = "Congratulations! You won the game!";
+            } else if (playerScore < computerScore) {
+                gameResult.textContent = "Sorry, you lost the game. Better luck next time!";
+            } else {
+                gameResult.textContent = "It's a tie game!";
+            }
+
+            // Disable buttons after the game ends
+            document.getElementById("rock").disabled = true;
+            document.getElementById("paper").disabled = true;
+            document.getElementById("scissors").disabled = true;
+        }
 
         // RPS UI BUTTONS
-
         const rock = document.querySelector("#rock");
         rock.addEventListener("click", () => {
             let playerSelection = "Rock";
@@ -153,9 +180,6 @@
             let computerSelection = getComputerChoice();
             playRound(playerSelection, computerSelection);
         });
-
-
-        
     </script>
 </body>
 
