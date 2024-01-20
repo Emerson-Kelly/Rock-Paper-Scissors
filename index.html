@@ -14,12 +14,12 @@
         }
 
         h1 {
-            color: #3d3d3d;
+            color: white;
             font-weight: 500;
         }
 
         p {
-            color: #1a1a1a;
+            color: white;
             height: 40px;
         }
 
@@ -30,10 +30,10 @@
         }
 
         body {
-            background-color: white;
+            background-color: rgb(0, 0, 0);
         }
 
-        .rps-container {}
+    
 
         @media only screen and (max-width: 600px) {
             .rps-container {
@@ -54,10 +54,18 @@
             border-radius: 2rem;
             font-size: 300%;
             margin: 0 1rem;
-
+            background-color: black;
         }
 
+        .rps-button:hover {
+            background-color: azure;
+            transition-delay: 25ms;
+        }
 
+        .go-again {
+            padding: 0.5rem 1rem;
+            margin-top: 36px;
+        }
 
         .selection {
             display: flex;
@@ -73,16 +81,16 @@
     </style>
 
 <div class="selection">
-    <img class="rps-image" src="https://steemitimages.com/DQmXMEunC26qDgTTYCo4c7paS5ehoNjSXikca7o9vZRbY9T/suit6.png"
+    <img class="rps-image" src="/Users/emersonkelly/repos/Rock-Paper-Scissors/RPS IMG.png"
         alt="rps">
-    <h1 id="gameresult"></h1>
+    <center><h1 id="gameresult"></h1></center>
     <p id="comselection"></p>
     <div class="rps-container">
         <button type="button" class="rps-button" id="rock">✊</button>
         <button type="button" class="rps-button" id="paper">✋</button>
         <button type="button" class="rps-button" id="scissors">✌️</button>
     </div>
-    <button type="button" id="goAgain" style="margin-top: 20px; display: none;">Go Again</button>
+    <button type="button" class="go-again" id="goAgain" style="margin-top: 36px; display: none;">Go Again</button>
 </div>
 
     <script>
@@ -93,6 +101,8 @@
         let playerScore = 0;
         let computerScore = 0;
 
+        startGame();
+
         function getComputerChoice() {
             let choices = Math.floor(Math.random() * 3);
             if (choices === 0) {
@@ -102,6 +112,10 @@
             } else {
                 return "Scissors";
             }
+        }
+
+        function startGame(){
+            comSelection.textContent = "The first player to win 5 rounds wins the game!";
         }
 
         function playRound(playerSelection, computerSelection) {
